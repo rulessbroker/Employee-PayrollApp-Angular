@@ -1,0 +1,56 @@
+<div class="main-content">
+    <div class="header-content">
+      <div class="emp-details-text">
+        Employee Details
+        <div class="emp-count">{{ employeeCount }}</div>
+      </div>
+      <div class="search-add-button">
+        <button class="search-button">
+          <mat-icon class="search-icon">search</mat-icon>
+        </button>
+        <button class="add-button" (click)="btnClick()">
+          <mat-icon class="add-icon">add</mat-icon>
+          <span class="add-button-text">Add User</span>
+        </button>
+      </div>
+    </div>
+  
+    <div class="table-main">
+      <table id="table-display" class="table">
+        <tr>
+          <th></th>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Department</th>
+          <th>Salary</th>
+          <th>Start Date</th>
+          <th>Actions</th>
+        </tr>
+        <tr *ngFor="let employee of allEmployees,let i = index">
+          <td>
+            <img [src]="employee.profilePic" alt="">
+          </td>
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.gender }}</td>
+          <td>
+            <div class="emp-department">
+              <div class="emp-department-div" *ngFor="let empDepartment of this.employee.department">
+                <span class="emp-department-text">{{empDepartment}}</span>
+              </div>
+            </div>
+          </td>
+          <td>₹ {{ employee.salary }}</td>
+          <td>{{ employee.startDate | date: 'mediumDate' }}</td>
+          <td>
+            <div class="action-icons">
+              <mat-icon class="delete-icon" (click)="deleteEmployee(employee.id)">delete</mat-icon>
+              <mat-icon class="edit-icon" (click)="editEmployee(employee.id)">edit</mat-icon>
+            </div>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <router-outlet></router-outlet>
